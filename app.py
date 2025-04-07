@@ -8,6 +8,8 @@ tasks = []
 task_id_control = 1
 
 # CRUD
+
+#Create
 @app.route('/tasks', methods=['POST'])
 def create_task():
    global task_id_control #usando variaveis de fora na função
@@ -19,6 +21,17 @@ def create_task():
    print(tasks)
    #retorno em json
    return jsonify({"message": "Nova tarefa criada com sucesso"})
+
+#Read
+@app.route('/tasks', methods=['GET'])
+def get_tasks():
+   #for rodando dentro da lista
+   task_list = [task.to_dict() for task in tasks]
+   output = {
+      "tasks": task_list,
+      "total_tasks": 0
+   }
+   return jsonify(output)
 
     
 # Logs de consulta debug=true
